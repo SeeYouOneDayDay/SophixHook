@@ -1,0 +1,40 @@
+apply plugin: 'java'
+//apply from: "$rootDir/gradle/publishing.gradle"
+
+//version = VERSION_NAME
+description = "A utility for doing compile or runtime code generation targeting Android's Dalvik VM"
+
+targetCompatibility = '1.8'
+sourceCompatibility = '1.8'
+
+repositories {
+     mavenLocal()
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+    maven { url 'https://repo1.maven.org/maven2/' }
+
+    // central
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/central' }
+    // jcenter
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    // public
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+    //google
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+    //gradle-plugin
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+    //apache snapshots
+    maven { url 'https://maven.aliyun.com/nexus/content/repositories/apache-snapshots' }
+}
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    compile 'com.jakewharton.android.repackaged:dalvik-dx:7.1.0_r7'
+}

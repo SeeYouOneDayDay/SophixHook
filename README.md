@@ -2,7 +2,7 @@
 结合阿里Sophix热修复方案(https://yq.aliyun.com/articles/74598?t=t1#)<br>
 使用了dexmaker库，主要用来动态生成dex文件。<br>
 使用方法：
-```Java
+``` java
 HookManager.findAndHookMethod(MainActivity.class, "onCreate", Bundle.class, new MethodCallback() {
     @Override
     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -21,7 +21,9 @@ HookManager.startHooks(base);
 通过对Native JmethodId内容替换实现method hook，为了达到类似于xposed的效果，需要动态生成method，使用了dexmaker库用以动态生成mehtod。<br><br>
 每个需要hook的方法都会dexmaker生成一个一摸一样的方法，将this和传入参数封装成Object[] args传给MethodUtil类的invoke函数，然后回调MethodCallback实现类似于xposed mehtod hook。<br>
 生成代理method方式如下：<br>
-```Java
+
+* MainActivity
+``` java
 package com.panda.hook.andhook;
 
 public class MainActivity extends AppCompatActivity  {
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity  {
     }
 }
 ```
-```Java
+* com_panda_hook_andhook_MainActivity
+``` java
 public class com_panda_hook_andhook_MainActivity {
   public com_panda_hook_andhook_MainActivity() {
       super();
